@@ -28,7 +28,8 @@ class ShorebirdEnv {
   ///
   /// Assumes we are running from $ROOT/bin/cache.
   Directory get shorebirdRoot {
-    return File(platform.script.toFilePath()).parent.parent.parent;
+    // return File(platform.script.toFilePath()).parent.parent.parent;
+    return File(platform.script.toFilePath()).parent.parent.parent.parent;
   }
 
   String get shorebirdEngineRevision {
@@ -185,8 +186,7 @@ class ShorebirdEnv {
   /// its default.
   Uri? get hostedUri {
     try {
-      final baseUrl = platform.environment['SHOREBIRD_HOSTED_URL'] ??
-          getShorebirdYaml()?.baseUrl;
+      final baseUrl = platform.environment['SHOREBIRD_HOSTED_URL'] ?? getShorebirdYaml()?.baseUrl;
       return baseUrl == null ? null : Uri.tryParse(baseUrl);
     } catch (_) {
       return null;
@@ -216,8 +216,7 @@ class ShorebirdEnv {
 
       // https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
       ||
-      (platform.environment.containsKey('AWS_REGION') &&
-          platform.environment.containsKey('CODEBUILD_INITIATOR'))
+      (platform.environment.containsKey('AWS_REGION') && platform.environment.containsKey('CODEBUILD_INITIATOR'))
 
       // https://wiki.jenkins.io/display/JENKINS/Building+a+software+project#Buildingasoftwareproject-belowJenkinsSetEnvironmentVariables
       ||

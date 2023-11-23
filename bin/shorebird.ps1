@@ -101,7 +101,8 @@ function Update-Flutter {
 
     if (!(Test-Path $flutterPath)) {
         Invoke-SilentlyIfPossible {
-            git clone --filter=tree:0 https://github.com/shorebirdtech/flutter.git --no-checkout "$flutterPath" 
+            # git clone --filter=tree:0 https://github.com/shorebirdtech/flutter.git --no-checkout "$flutterPath" 
+            git clone --filter=tree:0 https://github.com/nguyencse/flutter.git --no-checkout "$flutterPath" 
         }
     }
     else {
@@ -117,7 +118,8 @@ function Update-Flutter {
 
     # Set FLUTTER_STORAGE_BASE_URL=https://download.shorebird.dev and execute
     # a `flutter` command to trigger a download of Dart, etc.
-    $env:FLUTTER_STORAGE_BASE_URL = 'https://download.shorebird.dev';
+    # $env:FLUTTER_STORAGE_BASE_URL = 'https://download.shorebird.dev';
+    $env:FLUTTER_STORAGE_BASE_URL = 'http://localhost:8080';
     & $flutter --version
     Remove-Item Env:\FLUTTER_STORAGE_BASE_URL
 }
